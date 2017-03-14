@@ -1,0 +1,6 @@
+<h1>Account Lists</h1>
+    {% if account_list %}
+        {% for account in account_list %}
+        <a href = {% url 'accounts:detail' account.id %}>{{account.name}}</a> 
+        {% endfor %}
+    {% endif %}

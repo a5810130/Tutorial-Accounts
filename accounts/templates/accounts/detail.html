@@ -1,0 +1,6 @@
+<h1> {{ account.name }}'s account </h1>
+    {% if transaction_list %}
+        {% for action in transaction_list %}
+        {{action.date}}-{{ action.description }}-{{action.actionType}}-{{action.value}}
+        {% endfor %}
+    {% endif %}
