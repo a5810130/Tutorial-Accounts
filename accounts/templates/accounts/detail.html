@@ -1,6 +1,31 @@
-<h1> {{ account.name }}'s account </h1>
+<head>   
+   <html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {#<link rel="stylesheet" href="/resources/demos/style.css">#}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+  </head>
+    <h1> {{ account.name }}'s account </h1>
     {% if transaction_list %}
         {% for action in transaction_list %}
         {{action.date}}-{{ action.description }}-{{action.actionType}}-{{action.value}}
         {% endfor %}
     {% endif %}
+    
+    <form action={% url 'accounts:add_transaction' account.id %} method="post">    
+        {% csrf_token %}
+        <input type="datetime" id="datepicker" size="4" value={% now "SHORT_DATE_FORMAT" %} name="date">
+        <input type="text" name="description" placeholder="Description">
+        <input type="radio" name="type" value="Income"> Income    </option>
+        <input type="radio" name="type" value="Expenses"> Expenses  </option>
+        <input class="money" type="number" size=10 step="any" placeholder="money(THB)" name="value">
+        <input type="submit" class="submit1" value="add">
+    </form>

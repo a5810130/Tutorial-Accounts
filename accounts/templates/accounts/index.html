@@ -4,3 +4,8 @@
         <a href = {% url 'accounts:detail' account.id %}>{{account.name}}</a> 
         {% endfor %}
     {% endif %}
+    <form action={% url 'accounts:add_account' %} method="post">  
+    {% csrf_token %}
+        Account Name: <input type="text" name="account_name" >
+        <input type = "submit" class="submit0" value = "Create">
+    </form>
