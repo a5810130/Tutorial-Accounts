@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}"/>
 <head>   
    <html lang="en">
     <meta charset="utf-8">
@@ -28,7 +30,7 @@
             <td>{{ action.description }}</td>
             <td>{{action.actionType}}</td>
             <td>{{action.value}}</td>
-        <td>
+        </tr>
         {% endfor %}
     </table>
     <br>
