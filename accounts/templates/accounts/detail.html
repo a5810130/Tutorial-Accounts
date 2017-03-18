@@ -15,15 +15,30 @@
   </head>
     <h1> {{ account.name }}'s account </h1>
     {% if transaction_list %}
+    <table>
+        <tr>
+            <th> Date           </th>
+            <th> Description    </th>
+            <th> Type           </th>
+            <th> Money          </th>
+        </tr>
         {% for action in transaction_list %}
-        {{action.date}}-{{ action.description }}-{{action.actionType}}-{{action.value}}
+        <tr>
+            <td>{{action.date|date:"d/m/Y"}}</td>
+            <td>{{ action.description }}</td>
+            <td>{{action.actionType}}</td>
+            <td>{{action.value}}</td>
+        <td>
         {% endfor %}
+    </table>
+    <br>
     {% endif %}
     
     <form action={% url 'accounts:add_transaction' account.id %} method="post">    
         {% csrf_token %}
         <input type="datetime" id="datepicker" size="4" value={% now "SHORT_DATE_FORMAT" %} name="date">
         <input type="text" name="description" placeholder="Description">
+        <br>
         <input type="radio" name="type" value="Income"> Income    </option>
         <input type="radio" name="type" value="Expenses"> Expenses  </option>
         <input class="money" type="number" size=10 step="any" placeholder="money(THB)" name="value">
